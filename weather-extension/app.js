@@ -4,10 +4,7 @@ const apiKey = config.apiKey;
 const baseURL = 'https://api.openweathermap.org/data/2.5/';
 
 const searchInput = document.getElementById('search-input');
-const searchButton = document.getElementById('search-button');
-const metricCheckbox = document.getElementById('metric-checkbox');
 
-console.log('apiKey:', apiKey);
 
 // Fetch weather data
 async function fetchWeatherData(location, units = 'metric') {
@@ -32,23 +29,19 @@ function displayCurrentWeather(data) {
   document.querySelector('.location').textContent = `${data.name}, ${data.sys.country}`;
   document.querySelector('.conditions').textContent = data.weather[0].main;
   document.querySelector('.temp').textContent = `${(data.main.temp)}°`;
-  document.querySelector('.weather-icon').src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
-  document.querySelector('.weather-icon').alt = data.weather[0].description;
-}
-
-// Search location
-function searchLocation() {
-  const location = searchInput.value;
-  if (location) {
-    const units =  'metric';
-    fetchWeatherData(location, units);
-  }
+  setBackground(data.weather[0].main);
 }
 
 
-
-// Event listeners
-searchButton.addEventListener('click', searchLocation);
+function setBackground(condition) {
+  const weatherToImage = { 
+    'Clear': 'clear.jpg',
+    'Clouds': 'clouds.jpg',
+    'Rain': 'rain.jpg', 
+  };
+  const image = weatherToImage[condition];
+  document.body.style.backgroundImage = `url('${image}')`;
+}
 
 
 // Initialize with a default location
