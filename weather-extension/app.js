@@ -35,14 +35,12 @@ function displayCurrentWeather(data) {
 
 function setBackground(condition) {
   const weatherToImage = { 
-    'Clear': 'clear.jpg',
-    'Clouds': 'clouds.jpg',
-    'Rain': 'rain.jpg', 
+    'Clear': 'images/clear.jpg',
+    'Clouds': 'images/clouds.jpg',
+    'Rain': 'images/rain.jpg', 
   };
   const image = weatherToImage[condition];
   document.body.style.backgroundImage = `url('${image}')`;
 }
 
-
-// Initialize with a default location
 fetchWeatherData('Sydney');
